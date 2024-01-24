@@ -33,3 +33,12 @@ export const searchQueryRecipes = async function (searchQuery) {
     throw error;
   }
 };
+
+export const updateServings = function (newServings) {
+  state.recipe.ingredients.forEach(ingredient => {
+    ingredient.quantity =
+      ingredient.quantity * (newServings / state.recipe.servings);
+  });
+
+  state.recipe.servings = newServings;
+};

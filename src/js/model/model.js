@@ -28,6 +28,7 @@ export const searchQueryRecipes = async function (searchQuery) {
     state.search.pages = Math.ceil(
       data.recipes.length / configVariables.RESULT_PER_PAGE
     );
+    state.search.page = 1;
     console.log(state.search.pages);
   } catch (error) {
     throw error;

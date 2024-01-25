@@ -37,6 +37,11 @@ const recipeControl = async function () {
     await model.searchRecipeDetails(recipeId);
 
     recipeView.render(model.state.recipe);
+
+    // render the new result view with active selected recipe marked
+    searchResultView.render(
+      model.state.search.recipes.slice(...model.startEnd())
+    );
   } catch (error) {
     console.log(error);
     // alert(error.message);
@@ -52,7 +57,7 @@ const searchControl = async function (searchQuery) {
     await model.searchQueryRecipes(searchQuery);
 
     searchResultView.render(
-      model.state.search.recipes.slice(...helper.startEnd(1))
+      model.state.search.recipes.slice(...model.startEnd())
     );
     paginationView.render(model.state.search);
   } catch (error) {
@@ -63,7 +68,7 @@ const searchControl = async function (searchQuery) {
 
 const paginationControl = function (pageToGo) {
   searchResultView.render(
-    model.state.search.recipes.slice(...helper.startEnd(pageToGo))
+    model.state.search.recipes.slice(...model.startEnd(pageToGo))
   );
   model.state.search.page = pageToGo;
   paginationView.render(model.state.search);

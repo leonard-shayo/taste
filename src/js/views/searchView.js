@@ -11,6 +11,8 @@ class SearchView extends View {
       this.closest('.search__field');
 
       const query = this.querySelector('.search__field').value;
+      this.querySelector('.search__field').value = '';
+      this.querySelector('.search__field').value.blur;
 
       handler(query);
     });

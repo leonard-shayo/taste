@@ -9,10 +9,3 @@ export const getJson = async function (url) {
     throw error;
   }
 };
-
-export const startEnd = function (page) {
-  const start = (page - 1) * configVariables.RESULT_PER_PAGE;
-  const end = page * configVariables.RESULT_PER_PAGE;
-  console.log(page);
-  return [start, end];
-};

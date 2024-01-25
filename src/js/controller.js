@@ -35,6 +35,15 @@ const recipeControl = async function () {
       return;
     }
     recipeView.renderSpinner();
+
+    // retriving bookmarked recipr from local storage
+    if (JSON.parse(localStorage.getItem('recipeBookmark'))) {
+      model.state.bookmark = JSON.parse(localStorage.getItem('recipeBookmark'));
+      bookmarkView.render(model.state.bookmark);
+
+      console.log(model.state.bookmark);
+    }
+
     await model.searchRecipeDetails(recipeId);
 
     recipeView.render(model.state.recipe);

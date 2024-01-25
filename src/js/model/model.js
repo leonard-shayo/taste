@@ -70,9 +70,11 @@ export const addToBookmark = function (recipeId) {
   // determining if a recipe is bookmrked
   state.recipe.isbookmarked = true;
 
-  console.log('added');
-
   state.bookmark.push(state.recipe);
+
+  localStorage.setItem('recipeBookmark', JSON.stringify(state.bookmark));
+
+  console.log(state.bookmark);
 };
 
 export const removeToBookmark = function (recipeId) {
@@ -85,4 +87,6 @@ export const removeToBookmark = function (recipeId) {
   console.log('removed');
 
   state.bookmark.splice(removeIndex, 1);
+
+  localStorage.setItem('recipeBookmark', JSON.stringify(state.bookmark));
 };

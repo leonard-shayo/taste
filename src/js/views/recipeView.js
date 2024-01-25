@@ -3,6 +3,7 @@ import View from './view';
 
 class RecipeView extends View {
   _parentContainer = document.querySelector('.recipe');
+  _errorMessage = `Start by searching for a recipe or an ingredient. Have fun!`;
 
   render(data) {
     this._data = data;
@@ -67,9 +68,11 @@ class RecipeView extends View {
               <use href="${icons}#icon-user"></use>
             </svg>
           </div>
-          <button class="btn--round">
+          <button class="btn--round bookmarkbtn">
             <svg class="">
-              <use href="${icons}#icon-bookmark-fill"></use>
+              <use href="${icons}#icon-bookmark${
+      this._data.isbookmarked ? `-fill` : ``
+    }"></use>
             </svg>
           </button>
         </div>
@@ -136,6 +139,20 @@ class RecipeView extends View {
 
       handler(newServings);
     });
+  }
+
+  addBookmarkHandler(handler) {
+    this._parentContainer.addEventListener(
+      'click',
+      function (e) {
+        e.preventDefault();
+
+        const bookmarkBtn = e.target.closest('.bookmarkbtn');
+
+        if (!bookmarkBtn) return;
+        handler(this._data.id);
+      }.bind(this)
+    );
   }
 
   eventListener(eventHandler) {

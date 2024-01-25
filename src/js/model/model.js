@@ -1,7 +1,11 @@
 import * as configVariables from '../config.js';
 import * as helper from '../helper.js';
 
-export let state = { recipe: {}, search: { recipes: [], pages: 1, page: 1 } };
+export let state = {
+  recipe: {},
+  search: { recipes: [], pages: 1, page: 1 },
+  bookmark: [],
+};
 
 export const searchRecipeDetails = async function (recipeId) {
   try {
@@ -10,8 +14,17 @@ export const searchRecipeDetails = async function (recipeId) {
     const url = `${configVariables.FORKFY_API_URL}/${recipeId}`;
 
     const data = await helper.getJson(url);
-    console.log(data);
+
     state.recipe = data.recipe;
+
+    // determining if a recipe is bookmrked
+    if (state.bookmark.some(recipe => recipe?.id === data.recipe.id)) {
+      state.recipe.isbookmarked = true;
+    } else {
+      state.recipe.isbookmarked = false;
+    }
+
+    console.log(state.recipe);
   } catch (error) {
     console.log(error);
     throw error;
@@ -49,4 +62,27 @@ export const startEnd = function (page = state.search.page) {
   const end = page * configVariables.RESULT_PER_PAGE;
   console.log(page);
   return [start, end];
+};
+
+export const addToBookmark = function (recipeId) {
+  if (state.bookmark.some(recipe => recipe?.id === recipeId)) return;
+
+  // determining if a recipe is bookmrked
+  state.recipe.isbookmarked = true;
+
+  console.log('added');
+
+  state.bookmark.push(state.recipe);
+};
+
+export const removeToBookmark = function (recipeId) {
+  state.recipe.isbookmarked = false;
+
+  const removeIndex = state.bookmark.findIndex(
+    bookmarkedRecipe => bookmarkedRecipe.id === recipeId
+  );
+
+  console.log('removed');
+
+  state.bookmark.splice(removeIndex, 1);
 };

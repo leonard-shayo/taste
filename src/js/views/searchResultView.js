@@ -4,6 +4,7 @@ import * as model from '../model/model';
 
 class SearchResultView extends View {
   _parentContainer = document.querySelector('.results');
+  _errorMessage = `Start by searching for a recipe or an ingredient. Have fun!`;
 
   _generateMarkup() {
     const id = window.location.hash.slice(1);

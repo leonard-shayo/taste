@@ -20,6 +20,7 @@ class RecipeView extends View {
   // unit: '';
 
   _generateMarkup() {
+    console.log(this._data);
     return ` 
         <figure class="recipe__fig">
           <img src="${this._data.image_url}" alt="Tomato" class="recipe__img" />
@@ -109,11 +110,14 @@ class RecipeView extends View {
             }</span>. Please check out
             directions at their website.
           </p>
-          <a
+        <a  class="btn--small recipe__btn" href="#Logo">
+        ${this._data.source_url}
+        </a>
+
+         <a
             class="btn--small recipe__btn"
-            href="http://thepioneerwoman.com/cooking/pasta-with-tomato-cream-sauce/"
-            target="_blank"
-          >
+            href="${this._data.source_url}"
+           > 
             <span>Directions</span>
             <svg class="search__icon">
               <use href="${icons}#icon-arrow-right"></use>

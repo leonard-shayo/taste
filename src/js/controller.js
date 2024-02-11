@@ -1,4 +1,4 @@
-import 'core-Js/stable';
+import 'core-js/stable';
 import 'regenerator-runtime/runtime.js';
 
 import recipeView from './views/recipeView';
@@ -10,10 +10,6 @@ import bookmarkView from './views/bookmarkView';
 import * as helper from './helper';
 
 import * as model from './model/model';
-
-if (module.hot) {
-  module.hot.accept();
-}
 
 const recipeContainer = document.querySelector('.recipe');
 
@@ -30,7 +26,6 @@ const timeout = function (s) {
 const recipeControl = async function () {
   try {
     const recipeId = window.location.hash.slice(1);
-    console.log(recipeId);
     if (!recipeId) {
       return;
     }
@@ -40,8 +35,6 @@ const recipeControl = async function () {
     if (JSON.parse(localStorage.getItem('recipeBookmark'))) {
       model.state.bookmark = JSON.parse(localStorage.getItem('recipeBookmark'));
       bookmarkView.render(model.state.bookmark);
-
-      console.log(model.state.bookmark);
     }
 
     await model.searchRecipeDetails(recipeId);
@@ -110,6 +103,7 @@ const bookmarkControl = function (recipeId) {
 
 function init() {
   recipeView.eventListener(recipeControl);
+  // recipeView.addevent();
   searchView.addSearchHandler(searchControl);
   paginationView.addEventHandler(paginationControl);
   recipeView.addUpdateServingsshandler(updateServingsControl);

@@ -110,13 +110,12 @@ class RecipeView extends View {
             }</span>. Please check out
             directions at their website.
           </p>
-        <a  class="btn--small recipe__btn" href="#Logo">
-        ${this._data.source_url}
-        </a>
+        
 
          <a
             class="btn--small recipe__btn"
             href="${this._data.source_url}"
+          target="_blank"
            > 
             <span>Directions</span>
             <svg class="search__icon">
@@ -126,6 +125,18 @@ class RecipeView extends View {
         </div>
         `;
   }
+
+  // addevent() {
+  //   // if (!this._parentContainer.querySelector('.recipe__btn')) {
+  //   //   return;
+  //   // }
+
+  //   this._parentContainer
+  //     .querySelector('.recipe__btn')
+  //     ?.addEventListener('click', function (e) {
+  //       console.log('mambo');
+  //     });
+  // }
 
   addUpdateServingsshandler(handler) {
     this._parentContainer.addEventListener('click', function (e) {
